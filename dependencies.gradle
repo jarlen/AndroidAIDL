@@ -1,0 +1,64 @@
+ext {
+    //gradle & kotlin plugin version
+    def GRADLE_PLUGIN_VERSION = '3.6.4'
+    def KOTLIN_PLUGIN_VERSION = "1.4.21"
+
+    android = [
+            compileSdkVersion: 30,
+            buildToolsVersion: "30.0.0",
+            applicationId    : "cn.lvzhulin.zjsb",
+            minSdkVersion    : 26,
+            targetSdkVersion : 28
+    ]
+
+    version = [
+            appcompatVersion: "1.2.0"
+    ]
+    classPaths = [
+            gradlePlugin: "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION",
+            kotlinPlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_PLUGIN_VERSION"
+    ]
+    libDependencies = [
+            //google
+            appcompat                 : "androidx.appcompat:appcompat:${version["appcompatVersion"]}",
+            kotlin_stdlib             : "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_PLUGIN_VERSION",
+            coroutines_android        : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1",
+            core_ktx                  : "androidx.core:core-ktx:1.6.0",
+            constraintLayout          : "androidx.constraintlayout:constraintlayout:2.0.4",
+            multiDex                  : "androidx.multidex:multidex:2.0.0",
+
+            //app dependencies
+            rxpermissions             : "com.github.tbruyelle:rxpermissions:0.12",
+            rxjava2                   : "io.reactivex.rxjava2:rxjava:2.2.21",
+            rxandroid2                : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            rxjava3                   : "io.reactivex.rxjava3:rxjava:3.1.1",
+            rxandroid3                : "io.reactivex.rxjava3:rxandroid:3.0.0",
+            utilcode                  : "com.blankj:utilcode:1.30.6",
+            utilcodex                 : "com.blankj:utilcodex:1.30.6",
+            timber                    : "com.jakewharton.timber:timber:4.7.1",
+            eventbus                  : "org.greenrobot:eventbus:3.2.0",
+
+            smart_refresh             : "io.github.scwang90:refresh-layout-kernel:2.0.5",
+            smart_refresh_header      : "io.github.scwang90:refresh-header-classics:2.0.5",
+            smart_refresh_footer      : "io.github.scwang90:refresh-footer-classics:2.0.5",
+
+            //network
+            okhttp                    : "com.squareup.okhttp3:okhttp:4.9.0",
+            okio                      : "com.squareup.okio:okio:2.8.0",
+            okhttp_logging_interceptor: "com.squareup.okhttp3:logging-interceptor:4.9.0",
+            retrofit2                 : "com.squareup.retrofit2:retrofit:2.9.0",
+            converter_gson            : "com.squareup.retrofit2:converter-gson:2.9.0",
+            coroutines_adapter        : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2",
+            rxjava2_adapter           : "com.squareup.retrofit2:adapter-rxjava2:2.9.0",
+            rxjava3_adapter           : "com.squareup.retrofit2:adapter-rxjava3:2.9.0",
+            glide                     : "com.github.bumptech.glide:glide:4.12.0",
+            glide_compiler            : "com.github.bumptech.glide:compiler:4.12.0",
+
+            //alibaba
+            fastjson                  : "com.alibaba:fastjson:1.2.61",
+            fastjson2                 : "com.alibaba.fastjson2:fastjson2:2.0.52",
+
+            /*Tencent*/
+            bugly                      : "com.tencent.bugly:crashreport:4.1.9.3"
+    ]
+}
