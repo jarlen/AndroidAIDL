@@ -18,8 +18,8 @@ public class MessageService extends Service {
         }
 
         @Override
-        public void sendMsg(String client, Message msg) throws RemoteException {
-            MessageManager.sendMsg(client, msg);
+        public void sendMsg(Message msg) throws RemoteException {
+            MessageManager.sendMsg(msg);
         }
 
         @Override

@@ -43,12 +43,28 @@ public class MessageManager {
         }
     }
 
-    private static void sendMsg(Message msg) {
-        Collection<IMsgReceiver> msgReceiverList = receiverMap.values();
-        if (msgReceiverList == null) {
-            return;
-        }
-        for (IMsgReceiver receiver : msgReceiverList) {
+    public static void sendMsg(Message msg) {
+        if (TextUtils.isEmpty(msg.getClient())) {
+            /*to all client*/
+            Collection<IMsgReceiver> msgReceiverList = receiverMap.values();
+            for (IMsgReceiver receiver : msgReceiverList) {
+                try {
+                    receiver.onReceiver(msg);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (TextUtils.isEmpty(msg.getTo())) {
+            /*to server*/
+            IMsgReceiver receiver = receiverMap.get("server");
+            try {
+                receiver.onReceiver(msg);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        } else {
+            /*to one client*/
+            IMsgReceiver receiver = receiverMap.get(msg.getTo());
             try {
                 receiver.onReceiver(msg);
             } catch (RemoteException e) {

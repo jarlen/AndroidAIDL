@@ -26,6 +26,8 @@ ext {
             core_ktx                  : "androidx.core:core-ktx:1.6.0",
             constraintLayout          : "androidx.constraintlayout:constraintlayout:2.0.4",
             multiDex                  : "androidx.multidex:multidex:2.0.0",
+            recyclerview              : "androidx.recyclerview:recyclerview:1.2.1",
+
 
             //app dependencies
             rxpermissions             : "com.github.tbruyelle:rxpermissions:0.12",
@@ -59,6 +61,6 @@ ext {
             fastjson2                 : "com.alibaba.fastjson2:fastjson2:2.0.52",
 
             /*Tencent*/
-            bugly                      : "com.tencent.bugly:crashreport:4.1.9.3"
+            bugly                     : "com.tencent.bugly:crashreport:4.1.9.3"
     ]
 }

@@ -5,7 +5,7 @@ def year = new Date().format("yyyy", TimeZone.getTimeZone("GMT+08")).substring(2
 android {
     compileSdkVersion globalConfig.android.compileSdkVersion
     defaultConfig {
-        applicationId "cn.jarlen.android.aidl.server"
+        applicationId "cn.jarlen.android.aidl.demo"
         minSdkVersion globalConfig.android.minSdkVersion
         targetSdkVersion globalConfig.android.targetSdkVersion
         versionCode Integer.valueOf("${year}${date}")
@@ -58,7 +58,7 @@ android {
     //使生成的apk名字加上版本号
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "AIDL-Server-${variant.versionName}.apk"
+            outputFileName = "AIDL-Client-${variant.versionName}.apk"
         }
     }
 
@@ -76,5 +76,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation libDependencies.appcompat
     implementation libDependencies.constraintLayout
+    implementation libDependencies.recyclerview
+
     implementation project(path: ':aidl')
 }
