@@ -61,9 +61,8 @@ AIDL相关使用，主要分为三个部分
 
 ## Android AIDL调用方法活动周期
 
-
-
-
+![](https://github.com/0a08eb8a-5500-4521-8e88-21303564fd8e)
 
 ## Android AIDL调用方法线程切换
 
+![](https://github.com/4e299e09-10ef-4ae6-9cc3-4b3c78b2b516)
