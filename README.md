@@ -63,6 +63,44 @@ AIDL相关使用，主要分为三个部分
 
 ![](https://gitee.com/jarlen/AndroidAIDL/raw/master/images/Activity.png)
 
+```java
+2024-12-09 10:58:01.916 6158-6158/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->bindService
+2024-12-09 10:58:01.925 6203-6203/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[main,5,main]]Server->onCreate
+2024-12-09 10:58:01.925 6203-6203/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[main,5,main]]Server->onBind
+2024-12-09 10:58:01.936 6158-6158/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->onServiceConnected
+```
+
+```java
+2024-12-09 10:59:52.145 6158-6158/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->发消息:123456
+2024-12-09 10:59:52.145 6158-6158/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->发消息Before
+2024-12-09 10:59:52.147 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->sendMsg
+2024-12-09 10:59:53.149 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->来消息啦:123456, Thread[Binder:6203_4,5,main]
+2024-12-09 10:59:53.149 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->processClientMsg
+2024-12-09 10:59:53.149 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->sendMsg,client not found
+2024-12-09 10:59:53.149 6158-6158/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->发消息After
+```
+
+```java
+2024-12-09 11:00:50.105 6158-6308/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[Thread-2,5,main]]Client->发消息:123456
+2024-12-09 11:00:50.105 6158-6308/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[Thread-2,5,main]]Client->发消息Before
+2024-12-09 11:00:50.107 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->sendMsg
+2024-12-09 11:00:51.108 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->来消息啦:123456, Thread[Binder:6203_4,5,main]
+2024-12-09 11:00:51.108 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->processClientMsg
+2024-12-09 11:00:51.108 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->sendMsg,client not found
+2024-12-09 11:00:51.109 6158-6308/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[Thread-2,5,main]]Client->发消息After
+```
+
+```java
+2024-12-09 11:01:18.347 6158-6158/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->unbindService
+2024-12-09 11:01:18.351 6203-6203/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[main,5,main]]Server->onUnbind
+2024-12-09 11:01:18.351 6203-6203/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[main,5,main]]Server->onDestroy
+```
+
+```java
+2024-12-09 11:03:48.763 6488-6488/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[main,5,main]]Client->addMsgObserver
+2024-12-09 11:03:48.764 6203-6225/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Binder:6203_4,5,main]]Server->registerClient
+```
+
 ## Android AIDL调用方法线程切换
 
 ![](https://gitee.com/jarlen/AndroidAIDL/raw/master/images/ThreadChange.png)
@@ -71,3 +109,10 @@ AIDL相关使用，主要分为三个部分
 > * 不管调用方在主线程还是子线程，在通过AIDL接口调用时，AIDL接口接收并处理数据均在Binder线程
 > * 结果返回到调用方侧后又切换为原有的线程
 > * AIDL接口调用是一个同步处理过程
+
+```java
+2024-12-09 11:07:21.022 6203-6203/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[main,5,main]]Server->sendMessage
+2024-12-09 11:07:22.025 6488-6511/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[Binder:6488_5,5,main]]Client->来消息啦:say hell0 from server
+2024-12-09 11:07:33.345 6203-6586/cn.jarlen.android.aidl.server W/AIDL2024: [Thread[Thread-2,5,main]]Server->sendMessage
+2024-12-09 11:07:34.346 6488-6511/cn.jarlen.android.aidl.client W/AIDL2024: [Thread[Binder:6488_5,5,main]]Client->来消息啦:say hell1 from server
+```
