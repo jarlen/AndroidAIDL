@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             AIDLLog.w("Client->onServiceConnected");
             mUserService = IMsgService.Stub.asInterface(iBinder);
-//            if (mUserService != null){
-//                mUserService.asBinder()
-//            }
         }
 
         @Override
