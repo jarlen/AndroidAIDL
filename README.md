@@ -1,1 +1,4 @@
-利用android IPC AIDL技术，实现客户端与服务端通讯。
+# 利用android IPC AIDL技术，实现客户端与服务端通讯。
+
+##  Android AIDL调用方法活动周期
+
