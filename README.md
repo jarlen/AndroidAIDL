@@ -61,8 +61,13 @@ AIDL相关使用，主要分为三个部分
 
 ## Android AIDL调用方法活动周期
 
-![](https://github.com/0a08eb8a-5500-4521-8e88-21303564fd8e)
+![](https://gitee.com/jarlen/AndroidAIDL/raw/master/images/Activity.png)
 
 ## Android AIDL调用方法线程切换
 
-![](https://github.com/4e299e09-10ef-4ae6-9cc3-4b3c78b2b516)
+![](https://gitee.com/jarlen/AndroidAIDL/raw/master/images/ThreadChange.png)
+
+> * AIDL 接口业务处理隶属单独的Binder线程池
+> * 不管调用方在主线程还是子线程，在通过AIDL接口调用时，AIDL接口接收并处理数据均在Binder线程
+> * 结果返回到调用方侧后又切换为原有的线程
+> * AIDL接口调用是一个同步处理过程
