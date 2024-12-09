@@ -3,8 +3,8 @@ package cn.jarlen.android.aidl;
 
 // Declare any non-default types here with import statements
 
-import cn.jarlen.android.aidl.Message;
+import cn.jarlen.android.aidl.MsgData;
 
 interface IMsgReceiver {
-    void onReceiver(in Message msg);
+    void onReceiver(in MsgData msg);
 }

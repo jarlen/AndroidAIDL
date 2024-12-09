@@ -76,5 +76,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation libDependencies.appcompat
     implementation libDependencies.constraintLayout
-    implementation project(path: ':aidl')
+    api project(path: ':aidl')
 }

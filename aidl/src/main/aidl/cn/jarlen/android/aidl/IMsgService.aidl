@@ -4,12 +4,13 @@ package cn.jarlen.android.aidl;
 // Declare any non-default types here with import statements
 
 import cn.jarlen.android.aidl.IMsgReceiver;
-import cn.jarlen.android.aidl.Message;
+import cn.jarlen.android.aidl.MsgData;
 
 interface IMsgService {
-    void registerClient(String client,IMsgReceiver receiver);
 
-    void sendMsg(in Message msg);
+    void registerClient(IMsgReceiver receiver);
 
-    void unRegisterClient(String client,IMsgReceiver receiver);
+    void sendMsg(in MsgData msg);
+
+    void unRegisterClient(IMsgReceiver receiver);
 }

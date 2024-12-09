@@ -7,58 +7,74 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_client_set"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_send_in_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="在主线程发送消息"
-        android:textSize="16sp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_send_in_child"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="在子线程发送消息"
-        android:textSize="16sp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_bind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="绑定服务"
-        android:textSize="16sp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="注册"
-        android:textSize="16sp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_unbind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="解绑服务"
-        android:textSize="16sp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_msg_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="start|center_vertical"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_input_msg"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:gravity="start|center_vertical"
+        android:hint="输入发送的消息"
+        android:minHeight="48dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_bind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="绑定服务"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_unbind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="解绑服务"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_observer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="添加消息监听"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_start_thread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="启动线程" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_send_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="发送消息"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -3,60 +3,46 @@ package cn.jarlen.android.aidl.server;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.RemoteException;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import cn.jarlen.android.aidl.IMsgReceiver;
-import cn.jarlen.android.aidl.Message;
+import cn.jarlen.android.aidl.MsgData;
+import cn.jarlen.android.aidl.util.AIDLLog;
+import cn.jarlen.android.aidl.util.Utils;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MsgManager.MsgObserver {
 
     private AppCompatTextView tvMsg;
+    private CheckBox cbThread;
+    private int msgContentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tvMsg = findViewById(R.id.tv_msg_from_client);
-        findViewById(R.id.btn_send_in_main).setOnClickListener(this);
-        findViewById(R.id.btn_send_in_child).setOnClickListener(this);
-        MessageManager.registerClient("server", new IMsgReceiver.Stub() {
-            @Override
-            public void onReceiver(Message msg) throws RemoteException {
-                Log.e("jarlen24", "onReceiver at server,msg:" + msg.toString() + ",thread: " + Utils.getThreadPrint());
-                onReceiverMsg(msg);
-            }
-        });
+        tvMsg = findViewById(R.id.tv_msg_content);
+        cbThread = findViewById(R.id.cb_thread_type);
+        findViewById(R.id.btn_send_msg).setOnClickListener(this);
+
+        MsgManager.registerObserver(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_send_in_main:
-                sendMessage(true);
-                break;
-            case R.id.btn_send_in_child:
-                sendMessage(false);
+            case R.id.btn_send_msg:
+                sendMessage(!cbThread.isChecked());
                 break;
             default:
                 break;
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        MessageManager.unRegisterClient("server");
-        super.onDestroy();
-    }
-
     private void sendMessage(boolean isMainThread) {
-        Toast.makeText(this, "say hi at server to client", Toast.LENGTH_SHORT).show();
         if (isMainThread) {
             sendMessage();
             return;
@@ -71,24 +57,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void sendMessage() {
-        Log.e("jarlen24", "sendMessage at server:" + Utils.getThreadPrint());
-        Message msg = new Message("", "say hi from server", System.currentTimeMillis());
-        MessageManager.sendMsg(msg);
+        AIDLLog.w("Server->sendMessage");
+        MsgData msg = new MsgData("say hell" + msgContentIndex + " from server");
+        MessageService.sendMsg(msg);
+        msgContentIndex++;
     }
 
-    private void onReceiverMsg(Message msg) {
-        if (Utils.isMainThread()) {
-            tvMsg.setText(msg.getMsg());
-            return;
-        }
-        uiHandler.obtainMessage(0, msg).sendToTarget();
+    @Override
+    public void onMsgArrived(MsgData msgData) {
+        onReceiverMsg(msgData);
+    }
+
+    private void onReceiverMsg(MsgData msg) {
+        String msgContent = msg.getMsg();
+        AIDLLog.w("Server->来消息啦:" + msgContent + ", " + Utils.getThreadPrint());
+        updateMsgContent(msgContent);
     }
 
     private Handler uiHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull android.os.Message handleMsg) {
-            tvMsg.setText(((Message) handleMsg.obj).getMsg());
+            updateMsgContent(String.valueOf(handleMsg.obj));
         }
     };
 
+    private void updateMsgContent(String msgContent) {
+        if (Utils.isMainThread()) {
+            tvMsg.setText(msgContent);
+            return;
+        }
+        uiHandler.obtainMessage(0, msgContent).sendToTarget();
+    }
 }
